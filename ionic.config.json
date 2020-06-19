@@ -1,0 +1,7 @@
+{
+  "name": "cbxf_prueba_jcm",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
