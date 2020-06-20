@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios">
+    <ion-title>
+      Estudiantes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-searchbar placeholder="Busca un estudiante" [disabled]="estudianteLista.length > 0 ? false : true" (ionChange)="filtrado($event)"></ion-searchbar>
+  <ion-list *ngIf="estudianteLista.length > 0" class="padding-10">
+    <app-estudiante *ngFor="let estudiante of estudianteLista" [estudiante]="estudiante"></app-estudiante>
+  </ion-list>
+  <ion-item *ngIf="estudianteLista.length === 0">
+    <ion-label class="ion-text-wrap">
+      <h2>
+        No existen estudiantes registrados
+      </h2>
+    </ion-label>
+  </ion-item>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="'/estudiante/new'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

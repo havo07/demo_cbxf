@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="idKey === 'new'">Agregar</ion-title>
+    <ion-title *ngIf="idKey !== 'new'">Editar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="estudianteForm" (ngSubmit)="evento()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="Nombre" type="text" pattern="[a-zA-Z ]*" (keyup)="keyUpChecker($event)" [(ngModel)]="estudianteData.Nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Edad</ion-label>
+      <ion-input formControlName="Edad" type="number" [(ngModel)]="estudianteData.Edad"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Sexo</ion-label>
+      <ion-select placeholder="Selecciona uno" formControlName="Sexo" [(ngModel)]="estudianteData.Sexo"> 
+        <ion-select-option value="Hombre">Hombre</ion-select-option>
+        <ion-select-option value="Mujer">Mujer</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha de Nacimiento</ion-label>
+      <ion-datetime formControlName="FechaNacimiento" displayFormat="DD/MM/YYYY" 
+        max="2020-06-19" [(ngModel)]="estudianteData.FechaNacimiento"
+        doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <img [src]="urlfotoEstudiante" (click)="tomarImagen()" class="foto_perfil" />
+    </ion-item>
+    
+    <ion-button *ngIf="idKey === 'new'" (click)="crearRegistro()" [disabled]="estudianteForm.invalid" expand="block">
+      <ion-icon size="small" slot="icon-only" name="add"></ion-icon>
+      &nbsp;Agregar Alumno
+    </ion-button>
+    <ion-button *ngIf="idKey !== 'new'" (click)="actualizarRegistro()" [disabled]="estudianteForm.invalid"
+      expand="block">
+      <ion-icon size="small" slot="icon-only" name="refresh-outline"></ion-icon>
+      &nbsp;Actualizar Alumno
+    </ion-button>
+  </form>
+</ion-content>
